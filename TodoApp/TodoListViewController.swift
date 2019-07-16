@@ -10,7 +10,9 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["Item 1", "Item 2", "Item 3",  "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12",  "Item 13", "Item 14", "Item 15", "Item 16", "Item 17", "Item 18",]
+    var itemArray = ["Item 1", "Item 2", "Item 3",  "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -39,5 +41,31 @@ class TodoListViewController: UITableViewController {
         
         tableView.deselectRow(at: indexPath, animated: true) // usuwa zaznaczenie wiersza 
     }
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            //co się wydarzy po kliknięcu.
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addAction(action)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Dodaj nowe zadanie"
+            textField = alertTextField
+        }
+        
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+
 }
 
